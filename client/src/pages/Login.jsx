@@ -20,7 +20,7 @@ function Login() {
             navigate("/")
         }
         else{
-            message.error("response.data.message")
+            message.error(response.data.message)
         }
     } catch (error) {
         dispatch(HideLoading())
