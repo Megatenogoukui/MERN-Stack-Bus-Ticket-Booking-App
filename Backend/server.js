@@ -14,19 +14,18 @@ app.use('/api/bookings' ,bookingsRoute)
 const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {
-  const staticFolderPath = path.join(__dirname, 'Frontend', 'build');
-  console.log('Serving static files from:', staticFolderPath);
-  console.log("dirname :: " ,__dirname)
+  const rootPath = path.join(__dirname, '../../'); // Go up two directories to the root
+  const staticFolderPath = path.join(rootPath, 'Frontend', 'build');
+
   // Set a static folder
   app.use(express.static(staticFolderPath));
 
   // Any route which is not API will be routed to index.html
   app.get('*', (req, res) => {
     const indexPath = path.resolve(staticFolderPath, 'index.html');
-    console.log('Serving index.html from:', indexPath);
     res.sendFile(indexPath);
   });
-} else {
+}else {
   app.get("/", (req, res) => {
     res.send("API is running");
   });
