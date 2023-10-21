@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'production') {
   const staticFolderPath = path.join(__dirname, 'Frontend', 'build');
   console.log('Serving static files from:', staticFolderPath);
-
+  console.log("dirname :: " ,__dirname)
   // Set a static folder
   app.use(express.static(staticFolderPath));
 
