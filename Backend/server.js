@@ -13,6 +13,8 @@ app.use('/api/buses',busRoutes)
 app.use('/api/bookings' ,bookingsRoute)
 const port = process.env.PORT || 5000;
 
+const __dirname = path.resolve()
+
 if(process.env.NODE_ENV === 'production'){
     //Set a static folder
     app.use(express.static(path.join(__dirname , '/Frontend/build')))
