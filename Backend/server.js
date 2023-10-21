@@ -14,7 +14,7 @@ app.use('/api/bookings' ,bookingsRoute)
 const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {
-  const rootPath = path.join(__dirname, '../../'); // Go up two directories to the root
+  const rootPath = path.join(__dirname, '../'); // Go up two directories to the root
   const staticFolderPath = path.join(rootPath, 'Frontend', 'build');
 
   // Set a static folder
