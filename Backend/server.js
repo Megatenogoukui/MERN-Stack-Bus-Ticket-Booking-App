@@ -13,19 +13,24 @@ app.use('/api/buses',busRoutes)
 app.use('/api/bookings' ,bookingsRoute)
 const port = process.env.PORT || 5000;
 
-if(process.env.NODE_ENV === 'production'){
-    //Set a static folder
-    app.use(express.static(path.join(__dirname , '/Frontend/build')))
-  
-    //Any route which is not api will be router to index.html
-    app.get('*' ,(req,res) => {
-      res.sendFile(path.resolve(__dirname , 'Frontend' , 'build' , 'index.html'))
-    } )
-  } else{
-    app.get("/" , (req,res) => {
-      res.send("Api is running")
-  })
-  }
+if (process.env.NODE_ENV === 'production') {
+  const staticFolderPath = path.join(__dirname, 'Frontend', 'build');
+  console.log('Serving static files from:', staticFolderPath);
+
+  // Set a static folder
+  app.use(express.static(staticFolderPath));
+
+  // Any route which is not API will be routed to index.html
+  app.get('*', (req, res) => {
+    const indexPath = path.resolve(staticFolderPath, 'index.html');
+    console.log('Serving index.html from:', indexPath);
+    res.sendFile(indexPath);
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running");
+  });
+}
 
 app.listen(port ,() => {
     console.log(`Node server listening on port :${port}`  )
