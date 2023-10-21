@@ -24,7 +24,7 @@ function SeatSelection({
               if (selectedSeat.includes(seat + 1)){
                 seatClass = "selectedSeat"
               }else if(bus.seatsBooked.includes(seat + 1)){
-                console.log("hahahah")
+           
                 seatClass = "bookedSeat"
               }
               return <Col span = {6}>

@@ -14,6 +14,7 @@ function Booking() {
   const [showPrintModel, setShowPrintModel] = useState(false);
   const [seletedTicket, setSelectedTicket] = useState(null);
   const [bookings, setBookings] = useState(null);
+  let mappedData;
   const getBookings = async () => {
     try {
       dispatch(ShowLoading());
@@ -21,17 +22,32 @@ function Booking() {
         "/api/bookings/get-bookings-by-userid",
         {}
       );
+      
       dispatch(HideLoading());
       if (response.data.success) {
         setBookings(response.data.data);
         console.log(response.data.id)
-        const mappedData = response.data.data.filter((booking) => booking.user._id === response.data.id).map((booking) => {
-          return {
-            ...booking,
-            ...booking.bus,
-            key: booking._id,
-          };
-        });
+        if (window.location.pathname === "/admin/bookings") {
+          console.log(window.location.pathname)
+          mappedData = response.data.data.map((booking) => {
+            return {
+              ...booking,
+              ...booking.bus,
+              key: booking._id,
+            };
+          });
+          console.log(mappedData)
+        }
+        else{
+          mappedData = response.data.data.filter((booking) => booking.user._id === response.data.id).map((booking) => {
+            return {
+              ...booking,
+              ...booking.bus,
+              key: booking._id,
+            };
+          });
+        }
+       
         setBookings(mappedData);
         // message.success(response.data.message)
       } else {
@@ -94,7 +110,7 @@ function Booking() {
 
   useEffect(() => {
     getBookings();
-  }, []);
+  },[]);
 
   return (
     <div>

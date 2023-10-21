@@ -41,6 +41,7 @@ input , Select{
 .underline{
     text-decoration: underline;
     cursor: pointer;
+    
 }
 .primary-text{
     color: var(--primary);
