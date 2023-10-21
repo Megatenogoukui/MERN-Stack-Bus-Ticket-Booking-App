@@ -6,14 +6,14 @@ const userRoutes = require('./routes/usersRoute')
 const busRoutes = require('./routes/busRoute')
 const bookingsRoute = require('./routes/bookingsRoute')
 const path = require('path');
-
+const __dirname = path.resolve()
 app.use(express.json())
 app.use('/api/users',userRoutes)
 app.use('/api/buses',busRoutes)
 app.use('/api/bookings' ,bookingsRoute)
 const port = process.env.PORT || 5000;
 
-const __dirname = path.resolve()
+
 
 if(process.env.NODE_ENV === 'production'){
     //Set a static folder
